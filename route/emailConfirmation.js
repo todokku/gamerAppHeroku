@@ -7,7 +7,7 @@ module.exports = app => {
   app.post("/emailconfirm", generateToken, (req, res) => {
     if (req.body) {
       const { email, token } = req.body;
-      const url = `http://gamerapps.herokuapp.com/emailconfirm/${token}`;
+      const url = `https://gamerapps.herokuapp.com/emailconfirm/${token}`;
       const mailOptions = {
         from: "no.reply.confirm.email@gmail.com",
         to: email,
@@ -36,7 +36,6 @@ module.exports = app => {
         .exec()
         .then(result => {
           if (result) {
-            console.log(result);
             res.redirect("https://gamerapps.herokuapp.com/");
           }
         });
