@@ -7,7 +7,7 @@ module.exports = app => {
   app.post("/emailconfirm", generateToken, (req, res) => {
     if (req.body) {
       const { email, token } = req.body;
-      const url = `https://gamerapps.herokuapp.com/emailconfirm/${token}`;
+      const url = `https://gamerapps.herokuapp.com/emailconfirmtoken/${token}`;
       const mailOptions = {
         from: "no.reply.confirm.email@gmail.com",
         to: email,
@@ -25,7 +25,7 @@ module.exports = app => {
     }
   });
 
-  app.get("/emailconfirm/:token", verifyToken, (req, res) => {
+  app.get("/emailconfirmtoken/:token", verifyToken, (req, res) => {
     if (req.params.token) {
       const token = req.params.token;
       User.findOneAndUpdate(
