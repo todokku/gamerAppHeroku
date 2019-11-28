@@ -34,8 +34,6 @@ app.use(cookieParser());
 app.use(expressip().getIpInfoMiddleware);
 app.use(logRequest);
 
-app.set("etag", false);
-
 app.use(express.static(path.join(__dirname, "build")));
 
 app.get("/*", (req, res) => {
