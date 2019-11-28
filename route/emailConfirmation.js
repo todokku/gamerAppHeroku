@@ -36,6 +36,7 @@ module.exports = app => {
         .exec()
         .then(result => {
           if (result) {
+            console.log(result);
             res.redirect("https://gamerapps.herokuapp.com/");
           }
         });
