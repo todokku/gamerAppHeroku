@@ -1,6 +1,7 @@
 const { transporter } = require("../config/transporter");
 const { verifyToken } = require("../middleware/verifyToken");
 const { generateToken } = require("../middleware/generateToken");
+const { noCache } = require("../middleware/policy/noCache");
 const User = require("../model/user");
 
 module.exports = app => {
@@ -25,7 +26,7 @@ module.exports = app => {
     }
   });
 
-  app.get("/emailconfirmtoken/:token", verifyToken, (req, res) => {
+  app.get("/emailconfirmtoken/:token", [verifyToken, noCache], (req, res) => {
     if (req.params.token) {
       const token = req.params.token;
       User.findOneAndUpdate(
