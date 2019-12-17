@@ -3,12 +3,13 @@ const { protectAgainstHack } = require("../middleware/protectAgainstHack");
 const {
   checkGoogleLoginAccount
 } = require("../middleware/google/checkGoogleLoginAccount");
+const { generateToken } = require("../middleware/generateToken");
 const User = require("../model/user");
 
 module.exports = app => {
   app.post(
     "/login",
-    [protectAgainstHack, checkGoogleLoginAccount, checkPassword],
+    [protectAgainstHack, checkGoogleLoginAccount, checkPassword, generateToken],
     (req, res) => {
       if (res.statusCode == 200) {
         let { email } = req.body;
