@@ -12,6 +12,7 @@ const verifyToken = (req, res, next) => {
     jwt.verify(token ? token : tokenParam, jwtSecret, (err, decoded) => {
       if (err) res.status(401).send("You have no authorization");
       if (decoded) {
+        req.body.token = token;
         next();
       }
     });

@@ -4,7 +4,7 @@ const { verifyToken } = require("../middleware/verifyToken");
 module.exports = app => {
   app.post("/updateprofile", verifyToken, (req, res) => {
     const { name, photo, age, sex, city, country } = req.body.formUpdateProfile;
-    const { email, isGoogleAccount } = req.body;
+    const { email, isGoogleAccount, token } = req.body;
     if (isGoogleAccount) {
       User.findOneAndUpdate(
         { email: email },
@@ -50,6 +50,7 @@ module.exports = app => {
       )
         .exec()
         .then(user => {
+          user.token = token;
           res.status(200).send({ success: user });
         });
     }

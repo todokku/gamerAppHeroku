@@ -3,7 +3,7 @@ const { verifyToken } = require("../middleware/verifyToken");
 
 module.exports = app => {
   app.post("/getUser", verifyToken, (req, res) => {
-    const { email } = req.body;
+    const { email, token } = req.body;
     User.findOne(
       { email: email },
       {
@@ -13,6 +13,7 @@ module.exports = app => {
         __v: 0
       }
     ).then(user => {
+      user.token = token;
       res.status(200).send(user);
     });
   });

@@ -3,7 +3,7 @@ const { verifyToken } = require("../middleware/verifyToken");
 
 module.exports = app => {
   app.post("/deletegame", verifyToken, (req, res) => {
-    const { email, game } = req.body;
+    const { email, game, token } = req.body;
     User.findOneAndUpdate(
       { email: email },
       { $pull: { games: { name: game } } },
@@ -12,6 +12,7 @@ module.exports = app => {
       .exec()
       .then(user => {
         if (user) {
+          user.token = token;
           res.status(200).send(user);
         }
       });

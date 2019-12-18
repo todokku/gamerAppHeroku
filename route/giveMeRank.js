@@ -3,7 +3,7 @@ const { verifyToken } = require("../middleware/verifyToken");
 
 module.exports = app => {
   app.post("/givemerank", verifyToken, (req, res) => {
-    let { listGames } = req.body;
+    let { listGames, token } = req.body;
     User.find(
       { "games.name": { $in: listGames } },
       {
@@ -23,6 +23,9 @@ module.exports = app => {
         "games._id": 0,
         __v: 0
       }
-    ).then(user => res.status(200).send(user));
+    ).then(user => {
+      user.token = token;
+      res.status(200).send(user);
+    });
   });
 };

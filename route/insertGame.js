@@ -5,8 +5,7 @@ const { verifyGame } = require("../middleware/verifyGame");
 module.exports = app => {
   app.post("/insertgame", [verifyGame, verifyToken], (req, res) => {
     req.body.game.date = new Date();
-    const { game } = req.body;
-    const { email } = req.body;
+    const { email, game, token } = req.body;
     User.findOneAndUpdate(
       { email: email },
       {
@@ -36,6 +35,7 @@ module.exports = app => {
           )
             .exec()
             .then(user => {
+              user.token = token;
               if (user) res.status(200).send({ success: user });
             });
         }

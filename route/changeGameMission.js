@@ -4,7 +4,7 @@ const { verifyToken } = require("../middleware/verifyToken");
 
 module.exports = app => {
   app.post("/changemission", [verifyToken, verifyGameMission], (req, res) => {
-    const { email, game, mission } = req.body;
+    const { email, game, mission, token } = req.body;
     User.findOneAndUpdate(
       { email: email, "games.name": game },
       { $set: { "games.$.current_mission": mission } },
@@ -40,6 +40,7 @@ module.exports = app => {
           )
             .exec()
             .then(user => {
+              user.token = token;
               if (user) res.status(200).send({ success: user });
             });
       });
