@@ -7,19 +7,8 @@ const generateToken = (req, res, next) => {
   User.findOne({ email: email }).then(user => {
     let userId = user._id;
     let token = jwt.sign({ userId }, jwtSecret);
-    User.findOneAndUpdate(
-      { email: email },
-      { $set: { token: token } },
-      { new: true }
-    )
-      .exec()
-      .then(result => {
-        if (result) {
-          req.body.token = result.token;
-          next();
-        }
-      })
-      .catch(err => console.log(err));
+    req.body.token = token;
+    next();
   });
 };
 

@@ -12,7 +12,7 @@ module.exports = app => {
     [protectAgainstHack, checkGoogleLoginAccount, checkPassword, generateToken],
     (req, res) => {
       if (res.statusCode == 200) {
-        let { email } = req.body;
+        let { email, token } = req.body;
         User.findOne(
           { email: email },
           {
@@ -22,6 +22,7 @@ module.exports = app => {
             __v: 0
           }
         ).then(user => {
+          user.token = token;
           res.status(200).send(user);
         });
       }
