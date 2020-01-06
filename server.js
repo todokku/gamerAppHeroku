@@ -29,7 +29,7 @@ const getUser = require("./route/getUser");
 const PORT = 4000;
 
 const corsOptions = {
-  origin: "https://gamerapps.herokuapp.com/",
+  origin: "*",
   optionsSuccessStatus: 200
 };
 
