@@ -25,7 +25,7 @@ module.exports = app => {
     }
   });
 
-  app.get("/emailconfirmtoken/:token", verifyToken, (req, res) => {
+  app.post("/emailconfirmtoken/:token", verifyToken, (req, res) => {
     if (req.params.token) {
       const token = req.params.token;
       User.findOneAndUpdate(
