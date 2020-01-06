@@ -12,7 +12,7 @@ module.exports = app => {
         from: "no.reply.confirm.email@gmail.com",
         to: email,
         subject: "Mail de confirmation",
-        html: `<a href="${url}">Merci de cliquer ici pour confirmer votre adresse mail.</a>`
+        html: `<a href="${url}">Merci de cliquer ici pour confirmer votre adresse email.</a>`
       };
       transporter.sendMail(mailOptions, (err, info) => {
         if (err) {
