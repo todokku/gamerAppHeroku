@@ -28,8 +28,13 @@ const getUser = require("./route/getUser");
 
 const PORT = 4000;
 
+const corsOptions = {
+  origin: "https://gamerapps.herokuapp.com/",
+  optionsSuccessStatus: 200
+};
+
 app.use(bodyParser.json());
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(cookieParser());
 app.use(expressip().getIpInfoMiddleware);
 app.use(logRequest);
@@ -38,15 +43,6 @@ app.use(express.static(path.join(__dirname, "build")));
 
 app.get("/*", (req, res) => {
   res.sendFile(path.join(__dirname, "build", "index.html"));
-});
-
-app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "https://gamerapps.herokuapp.com/");
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
-  );
-  next();
 });
 
 connection.then(() => {
