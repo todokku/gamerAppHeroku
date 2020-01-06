@@ -30,6 +30,7 @@ const PORT = 4000;
 
 const corsOptions = {
   origin: "*",
+  methods: "GET,PUT,POST,DELETE",
   optionsSuccessStatus: 200
 };
 
