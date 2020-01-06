@@ -9,7 +9,7 @@ module.exports = app => {
     [checkLoginDb, validateFormSignUp, cryptUserPassword],
     (req, res) => {
       req.body.user.creation_date = new Date();
-      req.body.user.isEmailConfirmed = false;
+      req.body.user.isEmailConfirmed = true;
       req.body.user.isGoogleAccount = false;
       req.body.user.isPremium = false;
       let user = new User(req.body.user);
