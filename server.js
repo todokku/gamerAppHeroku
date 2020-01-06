@@ -40,6 +40,15 @@ app.get("/*", (req, res) => {
   res.sendFile(path.join(__dirname, "build", "index.html"));
 });
 
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "https://gamerapps.herokuapp.com/");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  next();
+});
+
 connection.then(() => {
   loginRoute(app);
   signUpRoute(app);
