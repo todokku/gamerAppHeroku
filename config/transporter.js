@@ -13,6 +13,9 @@ const transporter = nodemailer.createTransport({
   auth: {
     user: nodeMailerUser,
     pass: nodeMailerPass
+  },
+  tls: {
+    rejectUnauthorized: false
   }
 });
 
@@ -23,6 +26,9 @@ const transporterReminder = nodemailer.createTransport({
   auth: {
     user: nodeMailerUserRemindPass,
     pass: nodeMailerPassRemindPass
+  },
+  tls: {
+    rejectUnauthorized: false
   }
 });
 
